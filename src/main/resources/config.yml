@@ -1,0 +1,47 @@
+Messages:
+  noPermission: "&b[&cLuna Sangrienta&b] &eNo tienes permiso para hacer esto."
+  notEnoughArgs: "&b[&cLuna Sangrienta&b] &eNo has especificado suficientes argumentos."
+  reload: "&b[&cLuna Sangrienta&b] &eEl plugin se ha recargado con éxito."
+  bloodMoonStart: "&e¡La ira de Konshu ha teñido de &4rojo &ela luna!"
+  bloodMoonEnd: "&eSe ha apaciguado a Konshu y la luna ha vuelto a su estado natural."
+  bloodMoonStarted: "&b[&cLuna Sangrienta&b] &eComenzada la luna sangrienta forzosamente."
+  bloodMoonEnded: "&b[&cLuna Sangrienta&b] &eTerminada la luna sangrienta forzosamente."
+  bloodMoonChance: "&b[&cLuna Sangrienta&b] &eLa probabilidad es: %chance%%"
+  addedChance: "&b[&cLuna Sangrienta&b] &eHas añadido un %chance%% a la probabilidad de luna sangrienta."
+  addChanceArguments: "&b[&cLuna Sangrienta&b] &eEl uso es /konshuswrath addChance <Probabilidad>."
+  help:
+    - "&d&m -===- &b[&cLuna sangrienta&b] &d&m-===-"
+    - "&b/konshuswrath &eMuestra esta página."
+    - "&b/konshuswrath start [tiempo] &eComienza una luna sangrienta."
+    - "&b/konshuswrath end &eTermina la luna sangrienta actual."
+    - "&b/konshuswrath get &eMuestra la probabilidad actual de luna sangrienta."
+    - "&b/konshuswrath addChance <Probabilidad> &eAñade probabilidad de comenzar una luna sangrienta."
+    - "&b/konshuswrath reload &eRecarga la configuración del plugin."
+    - "&b"
+    - "&eLeyenda: &b<> &eObligatorio  &b[] &eOpcional"
+    - "&d&m -===- &b[&cLuna sangrienta&b] &d&m-===-"
+
+Config:
+  baseChance: 2
+  extraChancePerNight: 1.5
+
+Sounds:
+  bloodMoonStart: BLOCK_END_PORTAL_SPAWN
+  bloodMoonEnd: BLOCK_BELL_RESONATE
+
+BloodMoon:
+  duration: 600
+  moonPosition: 16000
+  thunders: true
+  thunderArea: 10
+  clearWeather: true
+  spawnMobs: true
+  mobArea: 20
+  mobsHealthMultiplier: 2
+  playerDamageReceivedMultiplier: 2
+  bossBarMessage: "&4&l🌙 Luna sangrienta 🌙"
+  mobs:
+    SkeletonKing:
+      weight: 10
+    AngrySludge:
+      weight: 5

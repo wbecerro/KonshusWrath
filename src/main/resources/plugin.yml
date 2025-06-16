@@ -1,0 +1,11 @@
+name: KonshusWrath
+version: 1.0
+main: wbe.konshusWrath.KonshusWrath
+api-version: 1.21
+author: wbe
+softdepend: [MythicMobs, PlaceholderAPI]
+commands:
+  KonshusWrath:
+    description: KonshusWrath main command
+    aliases: [ kw, konshusw, kwrath ]
+    permission: konshuswrath.command
