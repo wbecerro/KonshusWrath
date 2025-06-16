@@ -1,10 +1,12 @@
 package wbe.konshusWrath.config;
 
 import io.lumine.mythic.api.mobs.MythicMob;
+import io.lumine.mythic.bukkit.MythicBukkit;
 import org.bukkit.Sound;
 import org.bukkit.configuration.file.FileConfiguration;
 
 import java.util.HashMap;
+import java.util.Set;
 
 public class Config {
 
@@ -27,6 +29,7 @@ public class Config {
     public double playerDamageReceivedMultiplier;
     public String bossBarMessage;
     public HashMap<MythicMob, Integer> mobs = new HashMap<>();
+    public int totalWeight = 0;
 
     public Config(FileConfiguration config) {
         this.config = config;
@@ -52,6 +55,12 @@ public class Config {
     }
 
     private void loadMobs() {
-
+        Set<String> configMobs = config.getConfigurationSection("BloodMoon.mobs").getKeys(false);
+        for(String mob : configMobs) {
+            MythicMob mythicMob = MythicBukkit.inst().getMobManager().getMythicMob(mob).orElseThrow();
+            int weight = config.getInt("BloodMoon.mobs." + mob + ".weight");
+            totalWeight += weight;
+            mobs.put(mythicMob, weight);
+        }
     }
 }

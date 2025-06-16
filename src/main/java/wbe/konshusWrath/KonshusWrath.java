@@ -9,6 +9,7 @@ import wbe.konshusWrath.config.Config;
 import wbe.konshusWrath.config.Messages;
 import wbe.konshusWrath.listeners.EventListeners;
 import wbe.konshusWrath.papi.PapiExtension;
+import wbe.konshusWrath.utils.Scheduler;
 import wbe.konshusWrath.utils.Utilities;
 
 import java.io.File;
@@ -31,6 +32,10 @@ public final class KonshusWrath extends JavaPlugin {
 
     public static Utilities utilities;
 
+    public static boolean bloodMoonActive = false;
+
+    public static double bloodMoonChance = 0;
+
     @Override
     public void onEnable() {
         if(Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {
@@ -41,16 +46,19 @@ public final class KonshusWrath extends JavaPlugin {
         getLogger().info("Konshu's Wrath enabled correctly.");
         reloadConfiguration();
 
+        bloodMoonChance = config.baseChance;
         commandListener = new CommandListener();
         getCommand("konshuswrath").setExecutor(commandListener);
         tabListener = new TabListener();
         getCommand("konshuswrath").setTabCompleter(tabListener);
         eventListeners = new EventListeners();
         eventListeners.initializeListeners();
+        Scheduler.startSchedulers();
     }
 
     @Override
     public void onDisable() {
+        getServer().getScheduler().cancelTasks(this);
         reloadConfig();
         getLogger().info("Konshu's Wrath disabled correctly.");
     }

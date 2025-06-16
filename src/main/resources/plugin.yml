@@ -3,7 +3,8 @@ version: 1.0
 main: wbe.konshusWrath.KonshusWrath
 api-version: 1.21
 author: wbe
-softdepend: [MythicMobs, PlaceholderAPI]
+softdepend: [PlaceholderAPI]
+depend: [MythicMobs]
 commands:
   KonshusWrath:
     description: KonshusWrath main command

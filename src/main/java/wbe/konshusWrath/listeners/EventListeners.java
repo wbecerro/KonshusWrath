@@ -9,6 +9,9 @@ public class EventListeners {
         KonshusWrath plugin = KonshusWrath.getInstance();
         PluginManager pluginManager = plugin.getServer().getPluginManager();
 
-        //pluginManager.registerEvents();
+        pluginManager.registerEvents(new PlayerBedEnterListeners(), plugin);
+        pluginManager.registerEvents(new CreatureSpawnListeners(), plugin);
+        pluginManager.registerEvents(new EntityDamageListeners(), plugin);
+        pluginManager.registerEvents(new PlayerJoinListeners(), plugin);
     }
 }

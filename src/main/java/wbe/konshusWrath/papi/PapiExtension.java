@@ -2,6 +2,7 @@ package wbe.konshusWrath.papi;
 
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import org.bukkit.OfflinePlayer;
+import wbe.konshusWrath.KonshusWrath;
 
 public class PapiExtension extends PlaceholderExpansion {
 
@@ -27,6 +28,10 @@ public class PapiExtension extends PlaceholderExpansion {
 
     @Override
     public String onRequest(OfflinePlayer player, String params) {
+        if(params.equalsIgnoreCase("bloodMoonChance")) {
+            return String.valueOf(KonshusWrath.bloodMoonChance);
+        }
+
         return null;
     }
 }
