@@ -13,5 +13,6 @@ public class EventListeners {
         pluginManager.registerEvents(new CreatureSpawnListeners(), plugin);
         pluginManager.registerEvents(new EntityDamageListeners(), plugin);
         pluginManager.registerEvents(new PlayerJoinListeners(), plugin);
+        pluginManager.registerEvents(new MythicMobLootDropListeners(), plugin);
     }
 }
