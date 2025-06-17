@@ -28,13 +28,16 @@ public class CreatureSpawnListeners implements Listener {
 
         LivingEntity entity = event.getEntity();
 
-        NamespacedKey attributeKey = new NamespacedKey(KonshusWrath.getInstance(), "BloodMoonExtraHealth");
-        AttributeModifier attributeModifier = new AttributeModifier(attributeKey, KonshusWrath.config.mobsHealthMultiplier - 1,
-                AttributeModifier.Operation.MULTIPLY_SCALAR_1, EquipmentSlotGroup.ANY);
-        if(entity.getAttribute(Attribute.MAX_HEALTH).getModifiers().contains(attributeModifier)) {
-            return;
+        if(!MythicBukkit.inst().getMobManager().isMythicMob(entity)) {
+            NamespacedKey attributeKey = new NamespacedKey(KonshusWrath.getInstance(), "BloodMoonExtraHealth");
+            AttributeModifier attributeModifier = new AttributeModifier(attributeKey, KonshusWrath.config.mobsHealthMultiplier - 1,
+                    AttributeModifier.Operation.MULTIPLY_SCALAR_1, EquipmentSlotGroup.ANY);
+            if(entity.getAttribute(Attribute.MAX_HEALTH).getModifiers().contains(attributeModifier)) {
+                return;
+            }
+            entity.getAttribute(Attribute.MAX_HEALTH).addModifier(attributeModifier);
         }
-        entity.getAttribute(Attribute.MAX_HEALTH).addModifier(attributeModifier);
+        
         entity.setHealth(entity.getAttribute(Attribute.MAX_HEALTH).getValue());
 
         if(!KonshusWrath.config.spawnMob) {
