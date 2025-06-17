@@ -30,7 +30,12 @@ public class CommandListener implements CommandExecutor {
                     return false;
                 }
 
-                // HACER LO DEL ARGUMENTO
+                if(args.length > 1) {
+                    sender.sendMessage(KonshusWrath.messages.bloodMoonStarted);
+                    KonshusWrath.utilities.startBloodMoon(Integer.parseInt(args[1]));
+                    return true;
+                }
+
                 sender.sendMessage(KonshusWrath.messages.bloodMoonStarted);
                 KonshusWrath.utilities.startBloodMoon();
             } else if(args[0].equalsIgnoreCase("end")) {

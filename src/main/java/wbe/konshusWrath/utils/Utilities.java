@@ -37,6 +37,30 @@ public class Utilities {
         }, KonshusWrath.config.bloodMoonDuration * 20L);
     }
 
+    public void startBloodMoon(int duration) {
+        World world = Bukkit.getServer().getWorld("world");
+        if(KonshusWrath.config.weatherClear) {
+            world.setClearWeatherDuration(duration * 20);
+        }
+
+        world.setTime(KonshusWrath.config.bloodMoonPosition);
+        world.setGameRule(GameRule.DO_DAYLIGHT_CYCLE, false);
+
+        for(Player player : Bukkit.getOnlinePlayers()) {
+            player.playSound(player, KonshusWrath.config.bloodMoonStart, 1F, 1F);
+        }
+        Bukkit.broadcastMessage(KonshusWrath.messages.bloodMoonStart);
+
+        KonshusWrath.bloodMoonActive = true;
+        Scheduler.bossBar.setVisible(true);
+        Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(KonshusWrath.getInstance(), new Runnable() {
+            @Override
+            public void run() {
+                endBloodMoon();
+            }
+        }, duration * 20L);
+    }
+
     public void endBloodMoon() {
         World world = Bukkit.getServer().getWorld("world");
         KonshusWrath.bloodMoonActive = false;

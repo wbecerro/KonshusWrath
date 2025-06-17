@@ -37,7 +37,7 @@ public class CreatureSpawnListeners implements Listener {
             }
             entity.getAttribute(Attribute.MAX_HEALTH).addModifier(attributeModifier);
         }
-        
+
         entity.setHealth(entity.getAttribute(Attribute.MAX_HEALTH).getValue());
 
         if(!KonshusWrath.config.spawnMob) {
