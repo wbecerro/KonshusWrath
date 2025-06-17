@@ -33,14 +33,13 @@ Sounds:
 BloodMoon:
   duration: 600
   moonPosition: 16000
-  thunders: true
-  thunderArea: 10
   clearWeather: true
-  spawnMobs: true
-  mobArea: 20
   mobsHealthMultiplier: 2
   playerDamageReceivedMultiplier: 2
   bossBarMessage: "&4&l🌙 Luna sangrienta 🌙"
+  spawnMobs: true
+  mobArea: 20
+  mobChance: 5
   mobs:
     SkeletonKing:
       weight: 10

@@ -24,6 +24,51 @@ public class CommandListener implements CommandExecutor {
                 for(String line : KonshusWrath.messages.help) {
                     sender.sendMessage(line.replace("&", "§"));
                 }
+            } else if(args[0].equalsIgnoreCase("start")) {
+                if(!sender.hasPermission("konshuswrath.command.start")) {
+                    sender.sendMessage(KonshusWrath.messages.noPermission);
+                    return false;
+                }
+
+                // HACER LO DEL ARGUMENTO
+                sender.sendMessage(KonshusWrath.messages.bloodMoonStarted);
+                KonshusWrath.utilities.startBloodMoon();
+            } else if(args[0].equalsIgnoreCase("end")) {
+                if(!sender.hasPermission("konshuswrath.command.end")) {
+                    sender.sendMessage(KonshusWrath.messages.noPermission);
+                    return false;
+                }
+
+                sender.sendMessage(KonshusWrath.messages.bloodMoonEnded);
+                KonshusWrath.utilities.endBloodMoon();
+            } else if(args[0].equalsIgnoreCase("get")) {
+                if(!sender.hasPermission("konshuswrath.command.get")) {
+                    sender.sendMessage(KonshusWrath.messages.noPermission);
+                    return false;
+                }
+
+                sender.sendMessage(KonshusWrath.messages.bloodMoonChance.replace("%chance%", String.valueOf(KonshusWrath.bloodMoonChance)));
+            } else if(args[0].equalsIgnoreCase("addChance")) {
+                if(!sender.hasPermission("konshuswrath.command.addChance")) {
+                    sender.sendMessage(KonshusWrath.messages.noPermission);
+                    return false;
+                }
+
+                if(args.length < 2) {
+                    sender.sendMessage(KonshusWrath.messages.notEnoughArgs);
+                    sender.sendMessage(KonshusWrath.messages.addChanceArguments);
+                }
+
+                KonshusWrath.bloodMoonChance += Double.parseDouble(args[1]);
+                sender.sendMessage(KonshusWrath.messages.addedChance.replace("%chance%", args[1]));
+            } else if(args[0].equalsIgnoreCase("reload")) {
+                if(!sender.hasPermission("konshuswrath.command.reload")) {
+                    sender.sendMessage(KonshusWrath.messages.noPermission);
+                    return false;
+                }
+
+                KonshusWrath.getInstance().reloadConfiguration();
+                sender.sendMessage(KonshusWrath.messages.reload);
             }
         }
 

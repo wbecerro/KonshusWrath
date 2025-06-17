@@ -20,11 +20,10 @@ public class Config {
 
     public int bloodMoonDuration;
     public int bloodMoonPosition;
-    public boolean thunders;
-    public double thunderArea;
     public boolean weatherClear;
     public boolean spawnMob;
     public double mobArea;
+    public double mobChance;
     public double mobsHealthMultiplier;
     public double playerDamageReceivedMultiplier;
     public String bossBarMessage;
@@ -42,11 +41,10 @@ public class Config {
 
         bloodMoonDuration = config.getInt("BloodMoon.duration");
         bloodMoonPosition = config.getInt("BloodMoon.moonPosition");
-        thunders = config.getBoolean("BloodMoon.thunders");
-        thunderArea = config.getDouble("BloodMoon.thunderArea");
         weatherClear = config.getBoolean("BloodMoon.clearWeather");
         spawnMob = config.getBoolean("BloodMoon.spawnMobs");
         mobArea = config.getDouble("BloodMoon.mobArea");
+        mobChance = config.getDouble("BloodMoon.mobChance");
         mobsHealthMultiplier = config.getDouble("BloodMoon.mobsHealthMultiplier");
         playerDamageReceivedMultiplier = config.getDouble("BloodMoon.playerDamageReceivedMultiplier");
         bossBarMessage = config.getString("BloodMoon.bossBarMessage").replace("&", "§");

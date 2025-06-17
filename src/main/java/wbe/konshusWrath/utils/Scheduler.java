@@ -29,7 +29,7 @@ public class Scheduler {
         bossBar = Bukkit.createBossBar(barKey, KonshusWrath.config.bossBarMessage,
                 BarColor.RED, BarStyle.SOLID, BarFlag.DARKEN_SKY);
         bossBar.setVisible(false);
-        bossBar.setProgress(100);
+        bossBar.setProgress(1);
         for(Player player : Bukkit.getOnlinePlayers()) {
             bossBar.addPlayer(player);
         }
@@ -43,16 +43,7 @@ public class Scheduler {
                 } else if(time >= 12000L && time <= 23999L) { // Noche
                     if(!night) {
                         if(random.nextDouble(100) <= KonshusWrath.bloodMoonChance) {
-                            // Se activa la luna sangrienta
-                            KonshusWrath.bloodMoonActive = true;
-                            bossBar.setVisible(true);
-                            Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(KonshusWrath.getInstance(), new Runnable() {
-                                @Override
-                                public void run() {
-                                    KonshusWrath.bloodMoonActive = false;
-                                    bossBar.setVisible(false);
-                                }
-                            }, KonshusWrath.config.bloodMoonDuration * 20L);
+                            KonshusWrath.utilities.startBloodMoon();
                         } else {
                             KonshusWrath.bloodMoonChance += KonshusWrath.config.extraChancePerNight;
                         }
