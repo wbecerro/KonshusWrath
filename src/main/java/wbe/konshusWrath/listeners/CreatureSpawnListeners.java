@@ -5,6 +5,7 @@ import org.bukkit.NamespacedKey;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Monster;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -41,6 +42,10 @@ public class CreatureSpawnListeners implements Listener {
         entity.setHealth(entity.getAttribute(Attribute.MAX_HEALTH).getValue());
 
         if(!KonshusWrath.config.spawnMob) {
+            return;
+        }
+
+        if(!(entity instanceof Monster)) {
             return;
         }
 

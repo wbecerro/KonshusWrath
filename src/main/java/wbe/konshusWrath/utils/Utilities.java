@@ -6,8 +6,10 @@ import org.bukkit.GameRule;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
+import org.bukkit.scheduler.BukkitRunnable;
 import wbe.konshusWrath.KonshusWrath;
 
+import java.time.Instant;
 import java.util.Map;
 import java.util.Random;
 
@@ -35,6 +37,19 @@ public class Utilities {
                 endBloodMoon();
             }
         }, KonshusWrath.config.bloodMoonDuration * 20L);
+
+        double end = Instant.now().getEpochSecond() + KonshusWrath.config.bloodMoonDuration;
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                if(!KonshusWrath.bloodMoonActive) {
+                    this.cancel();
+                } else {
+                    double now = end - Instant.now().getEpochSecond();
+                    Scheduler.bossBar.setProgress(now / KonshusWrath.config.bloodMoonDuration);
+                }
+            }
+        }.runTaskTimer(KonshusWrath.getInstance(), 20L, 20L);
     }
 
     public void startBloodMoon(int duration) {
@@ -52,6 +67,7 @@ public class Utilities {
         Bukkit.broadcastMessage(KonshusWrath.messages.bloodMoonStart);
 
         KonshusWrath.bloodMoonActive = true;
+        Scheduler.bossBar.setProgress(1);
         Scheduler.bossBar.setVisible(true);
         Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(KonshusWrath.getInstance(), new Runnable() {
             @Override
@@ -59,6 +75,19 @@ public class Utilities {
                 endBloodMoon();
             }
         }, duration * 20L);
+
+        double end = Instant.now().getEpochSecond() + duration;
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                if(!KonshusWrath.bloodMoonActive) {
+                    this.cancel();
+                } else {
+                    double now = end - Instant.now().getEpochSecond();
+                    Scheduler.bossBar.setProgress(now / duration);
+                }
+            }
+        }.runTaskTimer(KonshusWrath.getInstance(), 20L, 20L);
     }
 
     public void endBloodMoon() {

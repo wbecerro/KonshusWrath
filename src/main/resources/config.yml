@@ -31,7 +31,7 @@ Sounds:
   bloodMoonEnd: BLOCK_BELL_RESONATE
 
 BloodMoon:
-  duration: 600
+  duration: 900
   moonPosition: 16000
   clearWeather: true
   mobsHealthMultiplier: 2
