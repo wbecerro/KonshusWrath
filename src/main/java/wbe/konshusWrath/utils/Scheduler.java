@@ -42,8 +42,10 @@ public class Scheduler {
                     night = false;
                 } else if(time >= 12000L && time <= 23999L) { // Noche
                     if(!night) {
-                        if(random.nextDouble(100) <= KonshusWrath.bloodMoonChance) {
-                            KonshusWrath.utilities.startBloodMoon();
+                        if(random.nextDouble(100) <= KonshusWrath.bloodMoonChance && !Bukkit.getOnlinePlayers().isEmpty()) {
+                            int duration = (int) (KonshusWrath.bloodMoonChance / KonshusWrath.config.chanceDivision) * 60;
+                            duration = Math.max(duration, KonshusWrath.config.bloodMoonMinDuration);
+                            KonshusWrath.utilities.startBloodMoon(duration);
                         } else {
                             KonshusWrath.bloodMoonChance += KonshusWrath.config.extraChancePerNight;
                         }

@@ -18,7 +18,8 @@ public class Config {
     public Sound bloodMoonStart;
     public Sound bloodMoonEnd;
 
-    public int bloodMoonDuration;
+    public int bloodMoonMinDuration;
+    public int chanceDivision;
     public int bloodMoonPosition;
     public boolean weatherClear;
     public boolean spawnMob;
@@ -39,7 +40,8 @@ public class Config {
         bloodMoonStart = Sound.valueOf(config.getString("Sounds.bloodMoonStart"));
         bloodMoonEnd = Sound.valueOf(config.getString("Sounds.bloodMoonEnd"));
 
-        bloodMoonDuration = config.getInt("BloodMoon.duration");
+        bloodMoonMinDuration = config.getInt("BloodMoon.minDuration");
+        chanceDivision = config.getInt("BloodMoon.chanceDivision");
         bloodMoonPosition = config.getInt("BloodMoon.moonPosition");
         weatherClear = config.getBoolean("BloodMoon.clearWeather");
         spawnMob = config.getBoolean("BloodMoon.spawnMobs");

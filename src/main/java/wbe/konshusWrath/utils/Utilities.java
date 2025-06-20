@@ -18,7 +18,7 @@ public class Utilities {
     public void startBloodMoon() {
         World world = Bukkit.getServer().getWorld("world");
         if(KonshusWrath.config.weatherClear) {
-            world.setClearWeatherDuration(KonshusWrath.config.bloodMoonDuration * 20);
+            world.setClearWeatherDuration(KonshusWrath.config.bloodMoonMinDuration * 20);
         }
 
         world.setTime(KonshusWrath.config.bloodMoonPosition);
@@ -36,9 +36,9 @@ public class Utilities {
             public void run() {
                 endBloodMoon();
             }
-        }, KonshusWrath.config.bloodMoonDuration * 20L);
+        }, KonshusWrath.config.bloodMoonMinDuration * 20L);
 
-        double end = Instant.now().getEpochSecond() + KonshusWrath.config.bloodMoonDuration;
+        double end = Instant.now().getEpochSecond() + KonshusWrath.config.bloodMoonMinDuration;
         new BukkitRunnable() {
             @Override
             public void run() {
@@ -46,7 +46,7 @@ public class Utilities {
                     this.cancel();
                 } else {
                     double now = end - Instant.now().getEpochSecond();
-                    Scheduler.bossBar.setProgress(now / KonshusWrath.config.bloodMoonDuration);
+                    Scheduler.bossBar.setProgress(now / KonshusWrath.config.bloodMoonMinDuration);
                 }
             }
         }.runTaskTimer(KonshusWrath.getInstance(), 20L, 20L);
