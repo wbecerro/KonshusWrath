@@ -48,6 +48,9 @@ public class Scheduler {
                             KonshusWrath.utilities.startBloodMoon(duration);
                         } else {
                             KonshusWrath.bloodMoonChance += KonshusWrath.config.extraChancePerNight;
+                            if(KonshusWrath.bloodMoonChance > 100) {
+                                KonshusWrath.bloodMoonChance = 100;
+                            }
                         }
                     }
                     night = true;
