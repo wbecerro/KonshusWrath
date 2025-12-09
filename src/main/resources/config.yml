@@ -10,6 +10,7 @@ Messages:
   addedChance: "&b[&cLuna Sangrienta&b] &eHas añadido un %chance%% a la probabilidad de luna sangrienta."
   addChanceArguments: "&b[&cLuna Sangrienta&b] &eEl uso es /konshuswrath addChance <Probabilidad>."
   cannotUseBed: "&b[&cLuna Sangrienta&b] &eLa maldición de Konshu no te permite dormir."
+  noMoon: "No activa"
   help:
     - "&d&m -===- &b[&cLuna sangrienta&b] &d&m-===-"
     - "&b/konshuswrath &eMuestra esta página."

@@ -4,6 +4,8 @@ import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import org.bukkit.OfflinePlayer;
 import wbe.konshusWrath.KonshusWrath;
 
+import java.time.Instant;
+
 public class PapiExtension extends PlaceholderExpansion {
 
     @Override
@@ -30,6 +32,13 @@ public class PapiExtension extends PlaceholderExpansion {
     public String onRequest(OfflinePlayer player, String params) {
         if(params.equalsIgnoreCase("bloodMoonChance")) {
             return String.valueOf(KonshusWrath.bloodMoonChance);
+        } else if(params.equalsIgnoreCase("bloodMoonDuration")) {
+            double duration = KonshusWrath.bloodMoonEnd - Instant.now().getEpochSecond();
+            if(duration <= 0) {
+                return KonshusWrath.messages.noMoon;
+            } else {
+                return KonshusWrath.utilities.getTime(duration);
+            }
         }
 
         return null;

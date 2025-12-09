@@ -36,6 +36,8 @@ public final class KonshusWrath extends JavaPlugin {
 
     public static double bloodMoonChance = 0;
 
+    public static double bloodMoonEnd = 0;
+
     @Override
     public void onEnable() {
         if(Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {

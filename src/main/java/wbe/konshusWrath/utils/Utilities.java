@@ -77,6 +77,7 @@ public class Utilities {
         }, duration * 20L);
 
         double end = Instant.now().getEpochSecond() + duration;
+        KonshusWrath.bloodMoonEnd = end;
         new BukkitRunnable() {
             @Override
             public void run() {
@@ -91,6 +92,7 @@ public class Utilities {
     }
 
     public void endBloodMoon() {
+        KonshusWrath.bloodMoonEnd = 0;
         World world = Bukkit.getServer().getWorld("world");
         KonshusWrath.bloodMoonActive = false;
         KonshusWrath.bloodMoonChance = KonshusWrath.config.baseChance;
@@ -119,6 +121,23 @@ public class Utilities {
         }
 
         return last.getKey();
+    }
+
+    public String getTime(double time) {
+        int hours = (int) (time / 3600);
+        int minutes = (int) ((time - 3600 * hours) / 60);
+        int seconds = (int) (time - hours * 3600 - minutes * 60);
+        String timeLine = "";
+        if(hours > 0) {
+            timeLine += hours + "h ";
+        }
+        if(minutes > 0) {
+            timeLine += minutes + "m ";
+        }
+        if(seconds > 0) {
+            timeLine += seconds + "s";
+        }
+        return timeLine;
     }
 
     public Location getNearbyLocation(Player player) {

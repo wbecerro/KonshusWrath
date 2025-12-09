@@ -20,6 +20,7 @@ public class Messages {
     public String addedChance;
     public String addChanceArguments;
     public String cannotUseBed;
+    public String noMoon;
     public List<String> help = new ArrayList<>();
 
     public Messages(FileConfiguration config) {
@@ -36,6 +37,7 @@ public class Messages {
         addedChance = config.getString("Messages.addedChance").replace("&", "§");
         addChanceArguments = config.getString("Messages.addChanceArguments").replace("&", "§");
         cannotUseBed = config.getString("Messages.cannotUseBed").replace("&", "§");
+        noMoon = config.getString("Messages.noMoon").replace("&", "§");
         help = config.getStringList("Messages.help");
     }
 }
