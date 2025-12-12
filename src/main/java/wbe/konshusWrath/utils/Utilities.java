@@ -85,6 +85,7 @@ public class Utilities {
                     this.cancel();
                 } else {
                     double now = end - Instant.now().getEpochSecond();
+                    now = now < 0 ? 0 : now;
                     Scheduler.bossBar.setProgress(now / duration);
                 }
             }
