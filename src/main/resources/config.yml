@@ -33,7 +33,7 @@ Sounds:
 
 BloodMoon:
   minDuration: 900
-  chanceDivision: 3
+  chanceDivision: 2
   moonPosition: 16000
   clearWeather: true
   mobsHealthMultiplier: 2

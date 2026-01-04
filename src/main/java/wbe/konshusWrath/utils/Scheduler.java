@@ -38,9 +38,9 @@ public class Scheduler {
             @Override
             public void run() {
                 long time = world.getTime();
-                if(time >= 0L && time <= 11999L) { // Día
+                if(time >= 0L && time <= 14999L) { // Día
                     night = false;
-                } else if(time >= 12000L && time <= 23999L) { // Noche
+                } else if(time >= KonshusWrath.config.bloodMoonPosition - 1000 && time <= KonshusWrath.config.bloodMoonPosition) { // Noche
                     if(!night) {
                         if(random.nextDouble(100) <= KonshusWrath.bloodMoonChance && !Bukkit.getOnlinePlayers().isEmpty()) {
                             int duration = (int) (KonshusWrath.bloodMoonChance / KonshusWrath.config.chanceDivision) * 60;

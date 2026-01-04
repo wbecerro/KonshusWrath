@@ -15,43 +15,6 @@ import java.util.Random;
 
 public class Utilities {
 
-    public void startBloodMoon() {
-        World world = Bukkit.getServer().getWorld("world");
-        if(KonshusWrath.config.weatherClear) {
-            world.setClearWeatherDuration(KonshusWrath.config.bloodMoonMinDuration * 20);
-        }
-
-        world.setTime(KonshusWrath.config.bloodMoonPosition);
-        world.setGameRule(GameRule.DO_DAYLIGHT_CYCLE, false);
-
-        for(Player player : Bukkit.getOnlinePlayers()) {
-            player.playSound(player, KonshusWrath.config.bloodMoonStart, 1F, 1F);
-        }
-        Bukkit.broadcastMessage(KonshusWrath.messages.bloodMoonStart);
-
-        KonshusWrath.bloodMoonActive = true;
-        Scheduler.bossBar.setVisible(true);
-        Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(KonshusWrath.getInstance(), new Runnable() {
-            @Override
-            public void run() {
-                endBloodMoon();
-            }
-        }, KonshusWrath.config.bloodMoonMinDuration * 20L);
-
-        double end = Instant.now().getEpochSecond() + KonshusWrath.config.bloodMoonMinDuration;
-        new BukkitRunnable() {
-            @Override
-            public void run() {
-                if(!KonshusWrath.bloodMoonActive) {
-                    this.cancel();
-                } else {
-                    double now = end - Instant.now().getEpochSecond();
-                    Scheduler.bossBar.setProgress(now / KonshusWrath.config.bloodMoonMinDuration);
-                }
-            }
-        }.runTaskTimer(KonshusWrath.getInstance(), 20L, 20L);
-    }
-
     public void startBloodMoon(int duration) {
         World world = Bukkit.getServer().getWorld("world");
         if(KonshusWrath.config.weatherClear) {
@@ -69,12 +32,14 @@ public class Utilities {
         KonshusWrath.bloodMoonActive = true;
         Scheduler.bossBar.setProgress(1);
         Scheduler.bossBar.setVisible(true);
-        Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(KonshusWrath.getInstance(), new Runnable() {
+        new BukkitRunnable() {
             @Override
             public void run() {
-                endBloodMoon();
+                if(KonshusWrath.bloodMoonActive) {
+                    endBloodMoon();
+                }
             }
-        }, duration * 20L);
+        }.runTaskLater(KonshusWrath.getInstance(), duration * 20L);
 
         double end = Instant.now().getEpochSecond() + duration;
         KonshusWrath.bloodMoonEnd = end;
@@ -104,7 +69,6 @@ public class Utilities {
         Bukkit.broadcastMessage(KonshusWrath.messages.bloodMoonEnd);
 
         world.setGameRule(GameRule.DO_DAYLIGHT_CYCLE, true);
-        world.setTime(0);
     }
 
     public MythicMob getMobToSpawn() {

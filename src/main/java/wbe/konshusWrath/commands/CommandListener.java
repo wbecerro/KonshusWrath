@@ -37,7 +37,7 @@ public class CommandListener implements CommandExecutor {
                 }
 
                 sender.sendMessage(KonshusWrath.messages.bloodMoonStarted);
-                KonshusWrath.utilities.startBloodMoon();
+                KonshusWrath.utilities.startBloodMoon(KonshusWrath.config.bloodMoonMinDuration);
             } else if(args[0].equalsIgnoreCase("end")) {
                 if(!sender.hasPermission("konshuswrath.command.end")) {
                     sender.sendMessage(KonshusWrath.messages.noPermission);
