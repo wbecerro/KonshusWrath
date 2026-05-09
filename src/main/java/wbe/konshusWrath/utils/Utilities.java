@@ -8,6 +8,7 @@ import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 import wbe.konshusWrath.KonshusWrath;
+import wbe.konshusWrath.config.BloodMoon;
 
 import java.time.Instant;
 import java.util.Map;
@@ -15,13 +16,13 @@ import java.util.Random;
 
 public class Utilities {
 
-    public void startBloodMoon(int duration) {
+    public void startBloodMoon(int duration, BloodMoon bloodMoon) {
         World world = Bukkit.getServer().getWorld("world");
-        if(KonshusWrath.config.weatherClear) {
+        if(bloodMoon.isClearWeather()) {
             world.setClearWeatherDuration(duration * 20);
         }
 
-        world.setTime(KonshusWrath.config.bloodMoonPosition);
+        world.setTime(bloodMoon.getPosition());
         world.setGameRule(GameRule.DO_DAYLIGHT_CYCLE, false);
 
         for(Player player : Bukkit.getOnlinePlayers()) {
@@ -29,13 +30,14 @@ public class Utilities {
         }
         Bukkit.broadcastMessage(KonshusWrath.messages.bloodMoonStart);
 
-        KonshusWrath.bloodMoonActive = true;
+        KonshusWrath.bloodMoonActive = bloodMoon;
         Scheduler.bossBar.setProgress(1);
         Scheduler.bossBar.setVisible(true);
+        Scheduler.bossBar.setTitle(KonshusWrath.bloodMoonActive.getBossbar());
         new BukkitRunnable() {
             @Override
             public void run() {
-                if(KonshusWrath.bloodMoonActive) {
+                if(KonshusWrath.bloodMoonActive != null) {
                     endBloodMoon();
                 }
             }
@@ -46,7 +48,7 @@ public class Utilities {
         new BukkitRunnable() {
             @Override
             public void run() {
-                if(!KonshusWrath.bloodMoonActive) {
+                if(KonshusWrath.bloodMoonActive == null) {
                     this.cancel();
                 } else {
                     double now = end - Instant.now().getEpochSecond();
@@ -60,7 +62,7 @@ public class Utilities {
     public void endBloodMoon() {
         KonshusWrath.bloodMoonEnd = 0;
         World world = Bukkit.getServer().getWorld("world");
-        KonshusWrath.bloodMoonActive = false;
+        KonshusWrath.bloodMoonActive = null;
         KonshusWrath.bloodMoonChance = KonshusWrath.config.baseChance;
         Scheduler.bossBar.setVisible(false);
         for(Player player : Bukkit.getOnlinePlayers()) {
@@ -71,18 +73,18 @@ public class Utilities {
         world.setGameRule(GameRule.DO_DAYLIGHT_CYCLE, true);
     }
 
-    public MythicMob getMobToSpawn() {
+    public BloodMoon getBloodMoon() {
         Random random = new Random();
-        int randomNumber = random.nextInt(KonshusWrath.config.totalWeight);
+        int randomNumber = random.nextInt(KonshusWrath.config.totalBloodMoonWeight);
         int weight = 0;
-        Map.Entry<MythicMob, Integer> last = null;
+        Map.Entry<BloodMoon, Integer> last = null;
 
-        for(Map.Entry<MythicMob, Integer> mob : KonshusWrath.config.mobs.entrySet()) {
-            weight += mob.getValue();
+        for(Map.Entry<BloodMoon, Integer> bloodMoon : KonshusWrath.config.bloodMoons.entrySet()) {
+            weight += bloodMoon.getValue();
             if(randomNumber < weight) {
-                return mob.getKey();
+                return bloodMoon.getKey();
             }
-            last = mob;
+            last = bloodMoon;
         }
 
         return last.getKey();
@@ -105,15 +107,25 @@ public class Utilities {
         return timeLine;
     }
 
-    public Location getNearbyLocation(Player player) {
+    public Location getNearbyLocation(Player player, BloodMoon bloodMoon) {
         Location playerLocation = player.getLocation();
         Random random = new Random();
 
         double x = playerLocation.getX();
         double z = playerLocation.getZ();
-        x = random.nextDouble(x - KonshusWrath.config.mobArea, x + KonshusWrath.config.mobArea);
-        z = random.nextDouble(z - KonshusWrath.config.mobArea, z + KonshusWrath.config.mobArea);
+        x = random.nextDouble(x - bloodMoon.getMobArea(), x + bloodMoon.getMobArea());
+        z = random.nextDouble(z - bloodMoon.getMobArea(), z + bloodMoon.getMobArea());
         Location finalLocation = new Location(player.getWorld(), x, player.getWorld().getHighestBlockAt((int) x, (int) z).getY(), z);
         return finalLocation;
+    }
+
+    public BloodMoon getBloodMoonByName(String name) {
+        for(BloodMoon bloodMoon : KonshusWrath.config.bloodMoons.keySet()) {
+            if(bloodMoon.getId().equalsIgnoreCase(name)) {
+                return bloodMoon;
+            }
+        }
+
+        return null;
     }
 }

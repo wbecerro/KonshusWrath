@@ -9,6 +9,7 @@ import org.bukkit.boss.BarStyle;
 import org.bukkit.boss.BossBar;
 import org.bukkit.entity.Player;
 import wbe.konshusWrath.KonshusWrath;
+import wbe.konshusWrath.config.BloodMoon;
 
 import java.util.Random;
 
@@ -26,7 +27,7 @@ public class Scheduler {
         World world = Bukkit.getServer().getWorld("world");
         Random random = new Random();
         NamespacedKey barKey = new NamespacedKey(KonshusWrath.getInstance(), "bloodMoon");
-        bossBar = Bukkit.createBossBar(barKey, KonshusWrath.config.bossBarMessage,
+        bossBar = Bukkit.createBossBar(barKey, "",
                 BarColor.RED, BarStyle.SOLID, BarFlag.DARKEN_SKY);
         bossBar.setVisible(false);
         bossBar.setProgress(1);
@@ -40,12 +41,13 @@ public class Scheduler {
                 long time = world.getTime();
                 if(time >= 0L && time <= 14999L) { // Día
                     night = false;
-                } else if(time >= KonshusWrath.config.bloodMoonPosition - 1000 && time <= KonshusWrath.config.bloodMoonPosition) { // Noche
+                } else if(time >= 15000L && time <= 23999L) { // Noche
                     if(!night) {
                         if(random.nextDouble(100) <= KonshusWrath.bloodMoonChance && !Bukkit.getOnlinePlayers().isEmpty()) {
-                            int duration = (int) (KonshusWrath.bloodMoonChance / KonshusWrath.config.chanceDivision) * 60;
-                            duration = Math.max(duration, KonshusWrath.config.bloodMoonMinDuration);
-                            KonshusWrath.utilities.startBloodMoon(duration);
+                            BloodMoon bloodMoon = KonshusWrath.utilities.getBloodMoon();
+                            int duration = (int) (KonshusWrath.bloodMoonChance / bloodMoon.getChanceDivision()) * 60;
+                            duration = Math.max(duration, bloodMoon.getMinDuration());
+                            KonshusWrath.utilities.startBloodMoon(duration, bloodMoon);
                         } else {
                             KonshusWrath.bloodMoonChance += KonshusWrath.config.extraChancePerNight;
                             if(KonshusWrath.bloodMoonChance > 100) {

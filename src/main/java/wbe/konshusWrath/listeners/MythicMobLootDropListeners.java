@@ -11,11 +11,13 @@ public class MythicMobLootDropListeners implements Listener {
 
     @EventHandler(priority = EventPriority.NORMAL)
     public void multiplyDropsOnBloodMoon(MythicMobLootDropEvent event) {
-        if(!KonshusWrath.bloodMoonActive) {
+        if(KonshusWrath.bloodMoonActive == null) {
             return;
         }
 
-        LootBag lootBag = event.getMobType().getDropTable().generate();
-        lootBag.drop(event.getMob().getLocation());
+        for(int i=0;i<KonshusWrath.bloodMoonActive.getExtraDropRolls();i++) {
+            LootBag lootBag = event.getMobType().getDropTable().generate();
+            lootBag.drop(event.getMob().getLocation());
+        }
     }
 }

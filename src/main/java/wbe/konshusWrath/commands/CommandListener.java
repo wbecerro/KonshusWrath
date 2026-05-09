@@ -5,6 +5,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import wbe.konshusWrath.KonshusWrath;
+import wbe.konshusWrath.config.BloodMoon;
 
 public class CommandListener implements CommandExecutor {
 
@@ -30,14 +31,26 @@ public class CommandListener implements CommandExecutor {
                     return false;
                 }
 
-                if(args.length > 1) {
+                if(args.length < 2) {
+                    sender.sendMessage(KonshusWrath.messages.notEnoughArgs);
+                    sender.sendMessage(KonshusWrath.messages.bloodMoonStartArguments);
+                    return false;
+                }
+
+                BloodMoon bloodMoon = KonshusWrath.utilities.getBloodMoonByName(args[1]);
+                if(bloodMoon == null) {
+                    sender.sendMessage(KonshusWrath.messages.bloodMoonDoesNotExist);
+                    return false;
+                }
+
+                if(args.length > 2) {
                     sender.sendMessage(KonshusWrath.messages.bloodMoonStarted);
-                    KonshusWrath.utilities.startBloodMoon(Integer.parseInt(args[1]));
+                    KonshusWrath.utilities.startBloodMoon(Integer.parseInt(args[2]), bloodMoon);
                     return true;
                 }
 
                 sender.sendMessage(KonshusWrath.messages.bloodMoonStarted);
-                KonshusWrath.utilities.startBloodMoon(KonshusWrath.config.bloodMoonMinDuration);
+                KonshusWrath.utilities.startBloodMoon(bloodMoon.getMinDuration(), bloodMoon);
             } else if(args[0].equalsIgnoreCase("end")) {
                 if(!sender.hasPermission("konshuswrath.command.end")) {
                     sender.sendMessage(KonshusWrath.messages.noPermission);
@@ -62,6 +75,7 @@ public class CommandListener implements CommandExecutor {
                 if(args.length < 2) {
                     sender.sendMessage(KonshusWrath.messages.notEnoughArgs);
                     sender.sendMessage(KonshusWrath.messages.addChanceArguments);
+                    return false;
                 }
 
                 KonshusWrath.bloodMoonChance += Double.parseDouble(args[1]);

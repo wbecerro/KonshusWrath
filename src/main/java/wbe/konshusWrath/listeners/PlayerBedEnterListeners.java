@@ -15,7 +15,7 @@ public class PlayerBedEnterListeners implements Listener {
             return;
         }
 
-        if(KonshusWrath.bloodMoonActive) {
+        if(KonshusWrath.bloodMoonActive != null) {
             event.setCancelled(true);
             event.setUseBed(Event.Result.DENY);
             event.getPlayer().sendMessage(KonshusWrath.messages.cannotUseBed);

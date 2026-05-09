@@ -15,7 +15,7 @@ public class EntityDamageListeners implements Listener {
             return;
         }
 
-        if(!KonshusWrath.bloodMoonActive) {
+        if(KonshusWrath.bloodMoonActive == null) {
             return;
         }
 
@@ -23,6 +23,6 @@ public class EntityDamageListeners implements Listener {
             return;
         }
 
-        event.setDamage(event.getDamage() * KonshusWrath.config.playerDamageReceivedMultiplier);
+        event.setDamage(event.getDamage() * KonshusWrath.bloodMoonActive.getPlayerDamageReceivedMultiplier());
     }
 }

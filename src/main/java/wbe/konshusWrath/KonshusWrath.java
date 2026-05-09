@@ -5,6 +5,7 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 import wbe.konshusWrath.commands.CommandListener;
 import wbe.konshusWrath.commands.TabListener;
+import wbe.konshusWrath.config.BloodMoon;
 import wbe.konshusWrath.config.Config;
 import wbe.konshusWrath.config.Messages;
 import wbe.konshusWrath.listeners.EventListeners;
@@ -32,7 +33,7 @@ public final class KonshusWrath extends JavaPlugin {
 
     public static Utilities utilities;
 
-    public static boolean bloodMoonActive = false;
+    public static BloodMoon bloodMoonActive = null;
 
     public static double bloodMoonChance = 0;
 

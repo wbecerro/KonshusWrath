@@ -5,16 +5,18 @@ Messages:
   bloodMoonStart: "&e¡La ira de Konshu ha teñido de &4rojo &ela luna!"
   bloodMoonEnd: "&eSe ha apaciguado a Konshu y la luna ha vuelto a su estado natural."
   bloodMoonStarted: "&b[&cLuna Sangrienta&b] &eComenzada la luna sangrienta forzosamente."
+  bloodMoonStartArguments: "&b[&cLuna Sangrienta&b] &eEl uso es /konshuswrath start <Tipo> [Tiempo]."
   bloodMoonEnded: "&b[&cLuna Sangrienta&b] &eTerminada la luna sangrienta forzosamente."
   bloodMoonChance: "&b[&cLuna Sangrienta&b] &eLa probabilidad es: %chance%%"
   addedChance: "&b[&cLuna Sangrienta&b] &eHas añadido un %chance%% a la probabilidad de luna sangrienta."
   addChanceArguments: "&b[&cLuna Sangrienta&b] &eEl uso es /konshuswrath addChance <Probabilidad>."
   cannotUseBed: "&b[&cLuna Sangrienta&b] &eLa maldición de Konshu no te permite dormir."
+  bloodMoonDoesNotExist: "&b[&cLuna Sangrienta&b] &eEsa tipo de luna sangrienta no existe."
   noMoon: "No activa"
   help:
     - "&d&m -===- &b[&cLuna sangrienta&b] &d&m-===-"
     - "&b/konshuswrath &eMuestra esta página."
-    - "&b/konshuswrath start [tiempo] &eComienza una luna sangrienta."
+    - "&b/konshuswrath start <Tipo> [Tiempo] &eComienza una luna sangrienta."
     - "&b/konshuswrath end &eTermina la luna sangrienta actual."
     - "&b/konshuswrath get &eMuestra la probabilidad actual de luna sangrienta."
     - "&b/konshuswrath addChance <Probabilidad> &eAñade probabilidad de comenzar una luna sangrienta."
@@ -31,19 +33,22 @@ Sounds:
   bloodMoonStart: BLOCK_END_PORTAL_SPAWN
   bloodMoonEnd: BLOCK_BELL_RESONATE
 
-BloodMoon:
-  minDuration: 900
-  chanceDivision: 2
-  moonPosition: 16000
-  clearWeather: true
-  mobsHealthMultiplier: 2
-  playerDamageReceivedMultiplier: 2
-  bossBarMessage: "&4&l🌙 Luna sangrienta 🌙"
-  spawnMobs: true
-  mobArea: 20
-  mobChance: 5
-  mobs:
-    SkeletonKing:
-      weight: 10
-    AngrySludge:
-      weight: 5
+BloodMoons:
+  normal:
+    weight: 100
+    minDuration: 900
+    chanceDivision: 2
+    moonPosition: 16000
+    clearWeather: true
+    mobsHealthMultiplier: 2
+    playerDamageReceivedMultiplier: 2
+    bossBarMessage: "&4&l🌙 Luna sangrienta 🌙"
+    spawnMobs: true
+    mobArea: 20
+    mobChance: 5
+    extraDropRolls: 2
+    mobs:
+      SkeletonKing:
+        weight: 10
+      AngrySludge:
+        weight: 5

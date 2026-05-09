@@ -23,7 +23,7 @@ public class CreatureSpawnListeners implements Listener {
             return;
         }
 
-        if(!KonshusWrath.bloodMoonActive) {
+        if(KonshusWrath.bloodMoonActive == null) {
             return;
         }
 
@@ -31,7 +31,7 @@ public class CreatureSpawnListeners implements Listener {
 
         if(!MythicBukkit.inst().getMobManager().isMythicMob(entity)) {
             NamespacedKey attributeKey = new NamespacedKey(KonshusWrath.getInstance(), "BloodMoonExtraHealth");
-            AttributeModifier attributeModifier = new AttributeModifier(attributeKey, KonshusWrath.config.mobsHealthMultiplier - 1,
+            AttributeModifier attributeModifier = new AttributeModifier(attributeKey, KonshusWrath.bloodMoonActive.getMobHealthMultiplier() - 1,
                     AttributeModifier.Operation.MULTIPLY_SCALAR_1, EquipmentSlotGroup.ANY);
             if(entity.getAttribute(Attribute.MAX_HEALTH).getModifiers().contains(attributeModifier)) {
                 return;
@@ -41,7 +41,7 @@ public class CreatureSpawnListeners implements Listener {
 
         entity.setHealth(entity.getAttribute(Attribute.MAX_HEALTH).getValue());
 
-        if(!KonshusWrath.config.spawnMob) {
+        if(!KonshusWrath.bloodMoonActive.isSpawnMobs()) {
             return;
         }
 
@@ -50,9 +50,9 @@ public class CreatureSpawnListeners implements Listener {
         }
 
         Random random = new Random();
-        if(random.nextDouble(100) <= KonshusWrath.config.mobChance) {
+        if(random.nextDouble(100) <= KonshusWrath.bloodMoonActive.getMobChance()) {
             event.setCancelled(true);
-            MythicBukkit.inst().getMobManager().spawnMob(KonshusWrath.utilities.getMobToSpawn().getInternalName(), entity.getLocation());
+            MythicBukkit.inst().getMobManager().spawnMob(KonshusWrath.bloodMoonActive.getMobToSpawn().getInternalName(), entity.getLocation());
         }
     }
 }
