@@ -41,7 +41,7 @@ public class Scheduler {
                 long time = world.getTime();
                 if(time >= 0L && time <= 14999L) { // Día
                     night = false;
-                } else if(time >= 15000L && time <= 23999L) { // Noche
+                } else if(time >= 13000L && time <= 23999L) { // Noche
                     if(!night) {
                         if(random.nextDouble(100) <= KonshusWrath.bloodMoonChance && !Bukkit.getOnlinePlayers().isEmpty()) {
                             BloodMoon bloodMoon = KonshusWrath.utilities.getBloodMoon();
