@@ -45,7 +45,11 @@ public class CreatureSpawnListeners implements Listener {
             return;
         }
 
-        if(!(entity instanceof Monster)) {
+        if(!(entity instanceof Monster monster)) {
+            return;
+        }
+
+        if(!MythicBukkit.inst().getMobManager().isMythicMob(monster)) {
             return;
         }
 
