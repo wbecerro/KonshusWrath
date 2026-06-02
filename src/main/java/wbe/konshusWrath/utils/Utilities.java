@@ -1,6 +1,5 @@
 package wbe.konshusWrath.utils;
 
-import io.lumine.mythic.api.mobs.MythicMob;
 import org.bukkit.Bukkit;
 import org.bukkit.GameRule;
 import org.bukkit.Location;
@@ -17,6 +16,10 @@ import java.util.Random;
 public class Utilities {
 
     public void startBloodMoon(int duration, BloodMoon bloodMoon) {
+        if(KonshusWrath.bloodMoonActive != null) {
+            return;
+        }
+
         World world = Bukkit.getServer().getWorld("world");
         if(bloodMoon.isClearWeather()) {
             world.setClearWeatherDuration(duration * 20);
@@ -34,7 +37,7 @@ public class Utilities {
         Scheduler.bossBar.setProgress(1);
         Scheduler.bossBar.setVisible(true);
         Scheduler.bossBar.setTitle(KonshusWrath.bloodMoonActive.getBossbar());
-        new BukkitRunnable() {
+        KonshusWrath.bloodMoonEndRunnable = new BukkitRunnable() {
             @Override
             public void run() {
                 if(KonshusWrath.bloodMoonActive != null) {
@@ -65,9 +68,15 @@ public class Utilities {
         KonshusWrath.bloodMoonActive = null;
         KonshusWrath.bloodMoonChance = KonshusWrath.config.baseChance;
         Scheduler.bossBar.setVisible(false);
+        if(KonshusWrath.bloodMoonEndRunnable != null) {
+            KonshusWrath.bloodMoonEndRunnable.cancel();
+            KonshusWrath.bloodMoonEndRunnable = null;
+        }
+
         for(Player player : Bukkit.getOnlinePlayers()) {
             player.playSound(player, KonshusWrath.config.bloodMoonEnd, 1F, 1F);
         }
+
         Bukkit.broadcastMessage(KonshusWrath.messages.bloodMoonEnd);
 
         world.setGameRule(GameRule.DO_DAYLIGHT_CYCLE, true);

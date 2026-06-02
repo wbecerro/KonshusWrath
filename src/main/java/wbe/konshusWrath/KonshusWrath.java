@@ -3,6 +3,8 @@ package wbe.konshusWrath;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.scheduler.BukkitTask;
 import wbe.konshusWrath.commands.CommandListener;
 import wbe.konshusWrath.commands.TabListener;
 import wbe.konshusWrath.config.BloodMoon;
@@ -34,6 +36,8 @@ public final class KonshusWrath extends JavaPlugin {
     public static Utilities utilities;
 
     public static BloodMoon bloodMoonActive = null;
+
+    public static BukkitTask bloodMoonEndRunnable = null;
 
     public static double bloodMoonChance = 0;
 

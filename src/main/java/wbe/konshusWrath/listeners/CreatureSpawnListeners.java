@@ -49,7 +49,7 @@ public class CreatureSpawnListeners implements Listener {
             return;
         }
 
-        if(!MythicBukkit.inst().getMobManager().isMythicMob(monster)) {
+        if(MythicBukkit.inst().getMobManager().isMythicMob(monster)) {
             return;
         }
 
