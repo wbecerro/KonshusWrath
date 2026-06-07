@@ -19,6 +19,7 @@ public class Messages {
     public String bloodMoonEnded;
     public String bloodMoonChance;
     public String addedChance;
+    public String removedChance;
     public String addChanceArguments;
     public String cannotUseBed;
     public String bloodMoonDoesNotExist;
@@ -38,6 +39,7 @@ public class Messages {
         bloodMoonEnded = config.getString("Messages.bloodMoonEnded").replace("&", "§");
         bloodMoonChance = config.getString("Messages.bloodMoonChance").replace("&", "§");
         addedChance = config.getString("Messages.addedChance").replace("&", "§");
+        removedChance = config.getString("Messages.removedChance").replace("&", "§");
         addChanceArguments = config.getString("Messages.addChanceArguments").replace("&", "§");
         cannotUseBed = config.getString("Messages.cannotUseBed").replace("&", "§");
         bloodMoonDoesNotExist = config.getString("Messages.bloodMoonDoesNotExist").replace("&", "§");

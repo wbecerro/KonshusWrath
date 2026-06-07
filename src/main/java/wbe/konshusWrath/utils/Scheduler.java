@@ -49,7 +49,7 @@ public class Scheduler {
                             duration = Math.max(duration, bloodMoon.getMinDuration());
                             KonshusWrath.utilities.startBloodMoon(duration, bloodMoon);
                         } else {
-                            KonshusWrath.bloodMoonChance += KonshusWrath.config.extraChancePerNight;
+                            KonshusWrath.utilities.addChance(KonshusWrath.config.extraChancePerNight);
                             if(KonshusWrath.bloodMoonChance > 100) {
                                 KonshusWrath.bloodMoonChance = 100;
                             }

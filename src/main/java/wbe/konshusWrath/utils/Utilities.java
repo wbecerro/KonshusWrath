@@ -137,4 +137,13 @@ public class Utilities {
 
         return null;
     }
+
+    public void addChance(double chance) {
+        KonshusWrath.bloodMoonChance += chance;
+        if(chance > 0) {
+            Bukkit.broadcastMessage(KonshusWrath.messages.addedChance.replace("%chance%", String.valueOf(chance)));
+        } else if(chance < 0) {
+            Bukkit.broadcastMessage(KonshusWrath.messages.removedChance.replace("%chance%", String.valueOf(chance * -1)));
+        }
+    }
 }

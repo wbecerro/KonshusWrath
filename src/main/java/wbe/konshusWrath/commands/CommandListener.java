@@ -78,8 +78,7 @@ public class CommandListener implements CommandExecutor {
                     return false;
                 }
 
-                KonshusWrath.bloodMoonChance += Double.parseDouble(args[1]);
-                sender.sendMessage(KonshusWrath.messages.addedChance.replace("%chance%", args[1]));
+                KonshusWrath.utilities.addChance(Double.parseDouble(args[1]));
             } else if(args[0].equalsIgnoreCase("reload")) {
                 if(!sender.hasPermission("konshuswrath.command.reload")) {
                     sender.sendMessage(KonshusWrath.messages.noPermission);
