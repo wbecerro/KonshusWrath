@@ -29,6 +29,21 @@ Messages:
 Config:
   baseChance: 2
   extraChancePerNight: 1.5
+  allowedSpawnReasons:
+    - "COMMAND"
+    - "CUSTOM"
+    - "DEFAULT"
+    - "ENCHANTMENT"
+    - "ENDER_PEARL"
+    - "JOCKEY"
+    - "MOUNT"
+    - "NATURAL"
+    - "NETHER_PORTAL"
+    - "PATROL"
+    - "RAID"
+    - "REINFORCEMENTS"
+    - "VILLAGE_INVASION"
+
 
 Sounds:
   bloodMoonStart: BLOCK_END_PORTAL_SPAWN

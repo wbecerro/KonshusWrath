@@ -23,11 +23,26 @@ public class CreatureSpawnListeners implements Listener {
             return;
         }
 
+        if(!KonshusWrath.config.allowedSpawnReasons.contains(event.getSpawnReason())) {
+            return;
+        }
+
         if(KonshusWrath.bloodMoonActive == null) {
             return;
         }
 
+        if(!KonshusWrath.bloodMoonActive.isSpawnMobs()) {
+            return;
+        }
+
         LivingEntity entity = event.getEntity();
+        if(!(entity instanceof Monster monster)) {
+            return;
+        }
+
+        if(MythicBukkit.inst().getMobManager().isMythicMob(monster)) {
+            return;
+        }
 
         if(!MythicBukkit.inst().getMobManager().isMythicMob(entity)) {
             NamespacedKey attributeKey = new NamespacedKey(KonshusWrath.getInstance(), "BloodMoonExtraHealth");
@@ -40,18 +55,6 @@ public class CreatureSpawnListeners implements Listener {
         }
 
         entity.setHealth(entity.getAttribute(Attribute.MAX_HEALTH).getValue());
-
-        if(!KonshusWrath.bloodMoonActive.isSpawnMobs()) {
-            return;
-        }
-
-        if(!(entity instanceof Monster monster)) {
-            return;
-        }
-
-        if(MythicBukkit.inst().getMobManager().isMythicMob(monster)) {
-            return;
-        }
 
         Random random = new Random();
         if(random.nextDouble(100) <= KonshusWrath.bloodMoonActive.getMobChance()) {

@@ -4,8 +4,11 @@ import io.lumine.mythic.api.mobs.MythicMob;
 import io.lumine.mythic.bukkit.MythicBukkit;
 import org.bukkit.Sound;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.event.entity.CreatureSpawnEvent;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Set;
 
 public class Config {
@@ -14,6 +17,7 @@ public class Config {
 
     public double baseChance;
     public double extraChancePerNight;
+    public List<CreatureSpawnEvent.SpawnReason> allowedSpawnReasons = new ArrayList<>();
 
     public Sound bloodMoonStart;
     public Sound bloodMoonEnd;
@@ -28,6 +32,10 @@ public class Config {
 
         baseChance = config.getDouble("Config.baseChance");
         extraChancePerNight = config.getDouble("Config.extraChancePerNight");
+        List<String> spawnReasons = config.getStringList("Config.allowedSpawnReasons");
+        spawnReasons.forEach(spawnReason -> {
+            allowedSpawnReasons.add(CreatureSpawnEvent.SpawnReason.valueOf(spawnReason));
+        });
 
         bloodMoonStart = Sound.valueOf(config.getString("Sounds.bloodMoonStart"));
         bloodMoonEnd = Sound.valueOf(config.getString("Sounds.bloodMoonEnd"));
